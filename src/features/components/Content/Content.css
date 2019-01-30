@@ -1,0 +1,40 @@
+ol {
+  padding: 0;
+}
+
+.content {
+  width: 490px;
+}
+
+.stream-tweet {
+  min-height: 50px;
+  color: grey;
+  font-size: 0.8rem;
+}
+
+.item-container > p,
+.item-footer {
+  padding-left: 55px;
+}
+
+.content > ol > li {
+  list-style-type: none;
+}
+
+.avatar {
+  float: left;
+}
+
+.icon-container {
+  display: inline-block;
+  position: relative;
+}
+
+.item-footer > .each-footer > button {
+  border: none;
+}
+
+.each-footer {
+  display: inline-block;
+  width: 108px;
+}
