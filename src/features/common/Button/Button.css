@@ -8,3 +8,7 @@
   border-color: #fea0a0a3;
   color: #f98591;
 }
+
+.tweet-button:hover {
+  cursor: pointer;
+}

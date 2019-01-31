@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./Topbar.css";
-import { Twitter, Home, Activity, Bell, Mail } from "react-feather";
+import { Twitter, Home, Activity, Bell, Mail, Search } from "react-feather";
 import Avatar from "../../common/Avatar/Avatar";
 import Button from "../../common/Button/Button";
 import avatar from "../../common/img/avatar.jpg";
@@ -38,14 +38,16 @@ export default class Toolbar extends React.Component {
           </div>
           <div className="pull-right">
             <form action="/search-query" method="post" className="search-form">
-              <label />
-              <input type="text" value="Search" />
+              <input type="text" />
+              <span>Search Twitter</span>
+              <Search size={15} className="search-icon" />
             </form>
             <div className="avatar">
               <Avatar size={"extra-small"} src={avatar} />
             </div>
-            <button>Tweet</button>
-            <Button />
+            <div>
+              <Button text={"Tweet"} />
+            </div>
           </div>
         </div>
       </div>

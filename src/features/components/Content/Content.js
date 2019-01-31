@@ -1,4 +1,5 @@
 import React from "react";
+import TweetBox from "../TweetBox/TweetBox";
 import Header from "../../common/Header/Header";
 import Context from "../../common/Context/Context";
 import ListText from "../../common/ListText/ListText";
@@ -25,55 +26,58 @@ export default class Content extends React.Component {
 
   render() {
     return (
-      <div className="content">
-        <ol>
-          <li>
-            <div className="stream-tweet">
-              <Context
-                username={this.state.anothername}
-                actions={this.state.action}
-              >
-                <Repeat size={13} />
-              </Context>
-              <div className="content">
-                <div className="item-header">
-                  <Header
-                    src={avatar}
-                    fullname={this.state.fullname}
-                    username={this.state.username}
-                    time={this.state.time}
-                  />
-                </div>
-                <div className="item-container">
-                  <ListText mainText={this.state.mainText} />
-                  <ListMedia src={img1} />
-                </div>
-                <div className="item-footer">
-                  <div className="each-footer">
-                    <Tooltip textTip={"Reply"} countNum={7}>
-                      <MessageCircle size={13} />
-                    </Tooltip>
+      <div>
+        <TweetBox />
+        <div className="content">
+          <ol>
+            <li>
+              <div className="stream-tweet">
+                <Context
+                  username={this.state.anothername}
+                  actions={this.state.action}
+                >
+                  <Repeat size={13} />
+                </Context>
+                <div className="content">
+                  <div className="item-header">
+                    <Header
+                      src={avatar}
+                      fullname={this.state.fullname}
+                      username={this.state.username}
+                      time={this.state.time}
+                    />
                   </div>
-                  <div className="each-footer">
-                    <Tooltip textTip={"Retweet"} countNum={235}>
-                      <Repeat size={13} />
-                    </Tooltip>
+                  <div className="item-container">
+                    <ListText mainText={this.state.mainText} />
+                    <ListMedia src={img1} />
                   </div>
-                  <div className="each-footer">
-                    <Tooltip textTip={"Like"} countNum={876}>
-                      <Heart size={13} />
-                    </Tooltip>
-                  </div>
-                  <div className="each-footer">
-                    <Tooltip textTip={"Direct Message"} countNum={""}>
-                      <Mail size={13} />
-                    </Tooltip>
+                  <div className="item-footer">
+                    <div className="each-footer">
+                      <Tooltip textTip={"Reply"} countNum={7}>
+                        <MessageCircle size={13} />
+                      </Tooltip>
+                    </div>
+                    <div className="each-footer">
+                      <Tooltip textTip={"Retweet"} countNum={235}>
+                        <Repeat size={13} />
+                      </Tooltip>
+                    </div>
+                    <div className="each-footer">
+                      <Tooltip textTip={"Like"} countNum={876}>
+                        <Heart size={13} />
+                      </Tooltip>
+                    </div>
+                    <div className="each-footer">
+                      <Tooltip textTip={"Direct Message"} countNum={""}>
+                        <Mail size={13} />
+                      </Tooltip>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </li>
-        </ol>
+            </li>
+          </ol>
+        </div>
       </div>
     );
   }

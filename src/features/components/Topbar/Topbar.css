@@ -4,6 +4,7 @@
 
 .topbar-inner {
   margin: 0 auto;
+  margin-top: 1.5em;
   width: 1080px;
   display: flex;
   justify-content: space-between;
@@ -45,27 +46,39 @@ li .notifications {
 
 .pull-right {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 0;
+}
+
+.search-form {
+  position: relative;
 }
 
 .search-form > input {
-  height: 28px;
-  width: 135px;
+  height: 32px;
+  width: 180px;
   font-size: 0.8em;
   border-radius: 20px;
+  border: 1px solid #0000001c;
+  position: relative;
+}
+
+.search-form > span {
+  position: absolute;
+  left: 13px;
+  bottom: 7px;
+  color: gray;
+}
+
+.search-form > .search-icon {
+  position: absolute;
+  right: 10px;
+  bottom: 7px;
+  color: grey;
 }
 
 .pull-right > .avatar {
   /* margin: 0 10px; */
   margin-left: 10px;
   margin-right: 10px;
-}
-
-.pull-right > button {
-}
-
-.pull-right > button:hover {
-  cursor: pointer;
 }
