@@ -2,6 +2,7 @@ import React from "react";
 import "./TweetBox.css";
 import Button from "../../common/Button/Button";
 import Avartar from "../../common/Avatar/Avatar";
+import avatar from "../../common/img/avatar.jpg";
 import { Image, Coffee, Cloud, MapPin } from "react-feather";
 
 export default class TweetBox extends React.Component {
@@ -9,10 +10,10 @@ export default class TweetBox extends React.Component {
     return (
       <div className="tweet-box">
         <div className="avatar">
-          <Avartar size={"extra-small"} />
+          <Avartar src={avatar} size={"extra-small"} />
         </div>
         <form className="tweet-form">
-          <div className="content">xx</div>
+          <div className="content" />
           <div className="toolbox">
             <div className="items">
               <span className="toolbox-item">

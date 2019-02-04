@@ -4,6 +4,8 @@ ol {
 
 .content {
   width: 490px;
+  margin: 0 20px;
+  padding: 20px 10px;
 }
 
 .stream-tweet {
