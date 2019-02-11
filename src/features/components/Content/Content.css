@@ -2,16 +2,23 @@ ol {
   padding: 0;
 }
 
-.content {
+.dashboard_content {
   width: 490px;
+}
+
+.dashboard_content_main {
+  width: 100%;
   margin: 0 20px;
-  padding: 20px 10px;
 }
 
 .stream-tweet {
   min-height: 50px;
   color: grey;
   font-size: 0.8rem;
+}
+
+.stream_tweet_content {
+  background-color: #fff;
 }
 
 .item-container > p,
@@ -32,11 +39,18 @@ ol {
   position: relative;
 }
 
+.item-header {
+  padding: 10px;
+}
+
+.item-footer {
+  margin-top: 20px;
+}
 .item-footer > .each-footer > button {
   border: none;
 }
 
 .each-footer {
   display: inline-block;
-  width: 108px;
+  width: 102px;
 }

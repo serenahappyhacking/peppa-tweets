@@ -2,6 +2,7 @@
   background-color: #f5c8d563;
   margin: 0 20px;
   padding: 20px 10px;
+  width: 100%;
 }
 
 .tweet-box > .avatar {
@@ -18,19 +19,31 @@
 .tweet-form > .content {
   border: 1px solid #f5c8d5;
   border-radius: 5px;
-}
-
-.content {
   height: 81px;
 }
 
+.content_focus_before {
+}
+
+.content_focus_after {
+}
 .toolbox {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.toolbox-item,
+.toolbox > .items {
+  display: flex;
+  width: 50%;
+  height: 50px;
+}
+
+.toolbox > .items > span {
+  /* Magic ! */
+  margin: auto;
+}
+
 .add-tweet-btn {
   padding-right: 20px;
 }
@@ -39,7 +52,4 @@
   border-radius: 50%;
   width: 30px;
   height: 30px;
-}
-
-.toolbox > .btns {
 }

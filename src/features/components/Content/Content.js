@@ -26,9 +26,9 @@ export default class Content extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="dashboard_content">
         <TweetBox />
-        <div className="content">
+        <div className="dashboard_content_main">
           <ol>
             <li>
               <div className="stream-tweet">
@@ -38,7 +38,7 @@ export default class Content extends React.Component {
                 >
                   <Repeat size={13} />
                 </Context>
-                <div className="content">
+                <div className="stream_tweet_content">
                   <div className="item-header">
                     <Header
                       src={avatar}

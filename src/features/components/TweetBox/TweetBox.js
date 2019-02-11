@@ -13,20 +13,28 @@ export default class TweetBox extends React.Component {
           <Avartar src={avatar} size={"extra-small"} />
         </div>
         <form className="tweet-form">
-          <div className="content" />
+          <div className="content">
+            <input
+              className="content_focus_before"
+              placeholder="What's happening ?"
+              type="file"
+              accept="image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/x-m4v"
+            />
+            <input className="content_focus_after" />
+          </div>
           <div className="toolbox">
             <div className="items">
-              <span className="toolbox-item">
-                <Image size={13} />
+              <span>
+                <Image size={20} />
               </span>
-              <span className="toolbox-item">
-                <Coffee size={13} />
+              <span>
+                <Coffee size={20} />
               </span>
-              <span className="toolbox-item">
-                <Cloud size={13} />
+              <span>
+                <Cloud size={20} />
               </span>
-              <span className="toolbox-item">
-                <MapPin size={13} />
+              <span>
+                <MapPin size={20} />
               </span>
             </div>
             <div className="btns">

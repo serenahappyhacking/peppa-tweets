@@ -12,6 +12,7 @@
 
 body {
   font-family: Helvetica, Arial, sans-serif;
+  background-color: #e6ecf0;
 }
 
 body * + * {
@@ -28,18 +29,9 @@ body * + * {
 }
 
 .dashboard {
-  max-width: 1080px;
+  max-width: 1300px;
   margin: 100px auto;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.dashboard > .left {
-}
-
-.dashboard > .content {
-}
-
-.dashboard > .right {
 }
