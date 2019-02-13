@@ -15,10 +15,6 @@ body {
   background-color: #e6ecf0;
 }
 
-body * + * {
-  /* margin-top: 1.5em; */
-}
-
 .topbar {
   position: fixed;
   top: 0;
@@ -32,6 +28,5 @@ body * + * {
   max-width: 1300px;
   margin: 100px auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
 }

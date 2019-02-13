@@ -1,3 +1,11 @@
 .dashboard-right {
   width: 290px;
 }
+
+.recommended_header > h3 {
+  display: inline-block;
+}
+
+.recommended_footer > .tooltip-container {
+  display: inline-block;
+}

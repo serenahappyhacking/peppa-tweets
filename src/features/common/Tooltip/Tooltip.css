@@ -1,17 +1,19 @@
+.tooltip-container {
+  position: relative;
+}
+
 .tooltip_inner {
   padding: 6px 8px;
   color: #fff;
   font-size: 1rem;
-  text-align: center;
+  text-align: left;
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0.75);
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  min-height: 2em;
-  min-width: 10em;
+  white-space: nowrap;
   position: absolute;
-  top: -3em;
-  left: -4em;
+  bottom: 1.5em;
 }
 
 .count {
