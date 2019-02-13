@@ -1,14 +1,8 @@
-.tweet-box {
-  background-color: #f5c8d563;
+.tweet_box {
+  background-color: #f5c8d5c7;
   margin: 0 20px;
   padding: 20px 10px;
   width: 100%;
-}
-
-.tweet-box > .avatar {
-  position: absolute;
-  margin-top: 18px;
-  margin-left: 15px;
 }
 
 .tweet-form {
@@ -22,26 +16,17 @@
   height: 81px;
 }
 
-.content_focus_before {
-}
-
-.content_focus_after {
-}
 .toolbox {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-top: 0.5em;
 }
 
 .toolbox > .items {
   display: flex;
-  width: 50%;
-  height: 50px;
-}
-
-.toolbox > .items > span {
-  /* Magic ! */
-  margin: auto;
+  justify-content: space-between;
+  width: 40%;
 }
 
 .add-tweet-btn {
@@ -52,4 +37,45 @@
   border-radius: 50%;
   width: 30px;
   height: 30px;
+}
+
+.tweet_box_before {
+  position: relative;
+}
+
+.tweet_box_after {
+  padding-left: 40px;
+}
+
+.content_focus_before {
+  width: 91%;
+  margin-left: 15px;
+  height: 40px;
+  font-size: 1 rem;
+  border-radius: 8px;
+  border: 1px solid #f5c8d5;
+  font-size: 0.9rem;
+}
+
+.content_focus_after {
+  width: 100%;
+  overflow: auto;
+  height: 80px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+}
+
+.upload_image {
+  position: absolute;
+  right: 20px;
+  top: 3px;
+}
+
+.upload {
+  display: none;
+}
+
+.avatar {
+  padding-top: 0.2em;
 }

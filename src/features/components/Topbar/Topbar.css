@@ -4,7 +4,6 @@
 
 .topbar-inner {
   margin: 0 auto;
-  margin-top: 1.5em;
   width: 1080px;
   display: flex;
   justify-content: space-between;
@@ -42,6 +41,11 @@
 
 li .notifications {
   width: 120px;
+}
+
+.twitter-icon {
+  height: 100%;
+  margin: auto 0;
 }
 
 .pull-right {

@@ -3,25 +3,56 @@ import "./TweetBox.css";
 import Button from "../../common/Button/Button";
 import Avartar from "../../common/Avatar/Avatar";
 import avatar from "../../common/img/avatar.jpg";
-import { Image, Coffee, Cloud, MapPin } from "react-feather";
+import { Image, Coffee, Cloud, MapPin, Smile } from "react-feather";
 
-export default class TweetBox extends React.Component {
+class TweetBoxFocus extends React.Component {
+  constructor(props) {
+    super(props);
+    this.textareaRef = React.createRef();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (!prevProps.isFocused && this.props.isFocused) {
+      this.textareaRef.current.focus();
+    }
+  }
+
   render() {
-    return (
-      <div className="tweet-box">
-        <div className="avatar">
-          <Avartar src={avatar} size={"extra-small"} />
+    const {
+      isFocused,
+      value,
+      onFocusChange,
+      onBlurChange,
+      onTextChange
+    } = this.props;
+    if (!isFocused && !value) {
+      return (
+        <div className="tweet_box_before">
+          <input
+            className="content_focus_before"
+            type="text"
+            placeholder="What's happening?"
+            onFocus={onFocusChange}
+          />
+          <span className="upload_image">
+            <Image size={15} />
+          </span>
+          <input
+            className="upload"
+            type="file"
+            accept="image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/x-m4v"
+          />
         </div>
-        <form className="tweet-form">
-          <div className="content">
-            <input
-              className="content_focus_before"
-              placeholder="What's happening ?"
-              type="file"
-              accept="image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/x-m4v"
-            />
-            <input className="content_focus_after" />
-          </div>
+      );
+    } else {
+      return (
+        <div className="tweet_box_after">
+          <textarea
+            className="content_focus_after"
+            onBlur={onBlurChange}
+            ref={this.textareaRef}
+            onChange={onTextChange}
+          />
           <div className="toolbox">
             <div className="items">
               <span>
@@ -44,7 +75,48 @@ export default class TweetBox extends React.Component {
               <Button text={"Tweet"} />
             </div>
           </div>
-        </form>
+        </div>
+      );
+    }
+  }
+}
+
+export default class TweetBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isFocused: false,
+      value: ""
+    };
+  }
+
+  handleFocus = e => {
+    if (e.target) {
+      this.setState({ isFocused: true });
+    }
+  };
+
+  handleBlur = () => {
+    this.setState({ isFocused: false });
+  };
+
+  handleTextChange = e => {
+    this.setState({ value: e.target.value });
+  };
+
+  render() {
+    return (
+      <div className="tweet_box">
+        <div className="avatar">
+          <Avartar src={avatar} size={"extra-small"} />
+        </div>
+        <TweetBoxFocus
+          isFocused={this.state.isFocused}
+          value={this.state.value}
+          onFocusChange={this.handleFocus}
+          onBlurChange={this.handleBlur}
+          onTextChange={this.handleTextChange}
+        />
       </div>
     );
   }
