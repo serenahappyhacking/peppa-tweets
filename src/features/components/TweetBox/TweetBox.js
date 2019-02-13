@@ -2,6 +2,7 @@ import React from "react";
 import "./TweetBox.css";
 import Button from "../../common/Button/Button";
 import Avartar from "../../common/Avatar/Avatar";
+import Tooltip from "../../common/Tooltip/Tooltip";
 import avatar from "../../common/img/avatar.jpg";
 import { Image, Coffee, Cloud, MapPin, Smile } from "react-feather";
 
@@ -9,6 +10,7 @@ class TweetBoxFocus extends React.Component {
   constructor(props) {
     super(props);
     this.textareaRef = React.createRef();
+    this.uploadRef = React.createRef();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -16,6 +18,12 @@ class TweetBoxFocus extends React.Component {
       this.textareaRef.current.focus();
     }
   }
+
+  handleClick = e => {
+    if (this.uploadRef) {
+      this.uploadRef.current.click();
+    }
+  };
 
   render() {
     const {
@@ -34,13 +42,16 @@ class TweetBoxFocus extends React.Component {
             placeholder="What's happening?"
             onFocus={onFocusChange}
           />
-          <span className="upload_image">
-            <Image size={15} />
-          </span>
+          <div className="upload_image">
+            <Tooltip textTip={"Add photos or video"} onClick={this.handleClick}>
+              <Image size={15} />
+            </Tooltip>
+          </div>
           <input
             className="upload"
             type="file"
             accept="image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/x-m4v"
+            ref={this.uploadRef}
           />
         </div>
       );

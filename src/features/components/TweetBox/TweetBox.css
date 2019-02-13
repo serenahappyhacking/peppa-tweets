@@ -68,8 +68,8 @@
 
 .upload_image {
   position: absolute;
-  right: 20px;
-  top: 3px;
+  right: 0.5em;
+  top: 1em;
 }
 
 .upload {

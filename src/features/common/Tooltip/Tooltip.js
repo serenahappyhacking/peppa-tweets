@@ -19,24 +19,24 @@ export default class Tooltip extends React.Component {
   };
 
   render() {
-    const { textTip, countNum, children } = this.props;
+    const { textTip, countNum, children, onClick } = this.props;
     return (
-      <button>
-        <div className="icon-container">
-          <span
-            onMouseOver={this.handleMouseOver}
-            onMouseOut={this.handleMouseOut}
-          >
-            {children}
-          </span>
-          {this.state.iconShowOnHover ? (
-            <span className="text-tip">{textTip}</span>
-          ) : (
-            ""
-          )}
-        </div>
+      <div className="tooltip-container" onClick={onClick}>
+        <span
+          onMouseOver={this.handleMouseOver}
+          onMouseOut={this.handleMouseOut}
+        >
+          {children}
+        </span>
+        {this.state.iconShowOnHover ? (
+          <div className="tooltip_inner">
+            <span>{textTip}</span>
+          </div>
+        ) : (
+          ""
+        )}
         <span className="count">{countNum}</span>
-      </button>
+      </div>
     );
   }
 }

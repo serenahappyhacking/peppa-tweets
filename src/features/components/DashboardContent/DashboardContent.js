@@ -8,9 +8,9 @@ import Tooltip from "../../common/Tooltip/Tooltip";
 import { MessageCircle, Repeat, Heart, Mail, User } from "react-feather";
 import img1 from "../../common/img/img1.jpg";
 import avatar from "../../common/img/avatar.jpg";
-import "./Content.css";
+import "./DashboardContent.css";
 
-export default class Content extends React.Component {
+export default class DashboardContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
