@@ -1,5 +1,18 @@
 .dashboard-right {
   width: 290px;
+  background-color: #fff;
+}
+
+.recommended_header {
+  padding: 0.6em;
+}
+
+.recommended_modules {
+  padding: 0.6em;
+}
+
+.recommended_footer {
+  padding: 0.6em;
 }
 
 .recommended_header > h3 {
@@ -8,4 +21,22 @@
 
 .recommended_footer > .tooltip-container {
   display: inline-block;
+}
+
+.recommended_item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e6ecf0;
+  padding: 0.6em;
+}
+
+.recommended_item > .right {
+  margin-left: 1em;
+}
+
+.recommended_item > .right > .tweet-button {
+  display: block;
+  background-color: #fff;
+  width: 100px;
+  margin-top: 0.3em;
 }

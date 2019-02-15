@@ -11,6 +11,7 @@ class TweetBoxFocus extends React.Component {
     super(props);
     this.textareaRef = React.createRef();
     this.uploadRef = React.createRef();
+    this.uploadImageRef = React.createRef();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -22,6 +23,13 @@ class TweetBoxFocus extends React.Component {
   handleClick = e => {
     if (this.uploadRef) {
       this.uploadRef.current.click();
+    }
+  };
+
+  handleClickImage = e => {
+    console.log("upload image now.");
+    if (this.uploadImageRef) {
+      this.uploadImageRef.current.click();
     }
   };
 
@@ -66,18 +74,29 @@ class TweetBoxFocus extends React.Component {
           />
           <div className="toolbox">
             <div className="items">
-              <span>
-                <Image size={20} />
-              </span>
-              <span>
+              <div>
+                <Tooltip
+                  textTip={"Add photos or video"}
+                  onClick={this.handleClickImage}
+                >
+                  <Image size={20} />
+                </Tooltip>
+              </div>
+              <input
+                className="upload"
+                type="file"
+                accept="image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/x-m4v"
+                ref={this.uploadImageRef}
+              />
+              <Tooltip textTip={"Add a GIF"}>
                 <Coffee size={20} />
-              </span>
-              <span>
+              </Tooltip>
+              <Tooltip textTip={"Add poll"}>
                 <Cloud size={20} />
-              </span>
-              <span>
+              </Tooltip>
+              <Tooltip textTip={"Location disabled"}>
                 <MapPin size={20} />
-              </span>
+              </Tooltip>
             </div>
             <div className="btns">
               <span className="add-tweet-btn">
@@ -102,12 +121,14 @@ export default class TweetBox extends React.Component {
   }
 
   handleFocus = e => {
+    console.log("focused");
     if (e.target) {
       this.setState({ isFocused: true });
     }
   };
 
   handleBlur = () => {
+    console.log("blur");
     this.setState({ isFocused: false });
   };
 
