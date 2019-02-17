@@ -3,7 +3,11 @@ import "./Button.css";
 
 export default class TweetBox extends React.Component {
   render() {
-    const { text } = this.props;
-    return <button className="tweet-button">{text}</button>;
+    const { text, onClick } = this.props;
+    return (
+      <button className="tweet-button" onClick={onClick}>
+        {text}
+      </button>
+    );
   }
 }

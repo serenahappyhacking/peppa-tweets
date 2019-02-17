@@ -6,22 +6,28 @@ import ListText from "../../common/ListText/ListText";
 import ListMedia from "../../common/ListMedia/ListMedia";
 import Tooltip from "../../common/Tooltip/Tooltip";
 import { MessageCircle, Repeat, Heart, Mail, User } from "react-feather";
-import img1 from "../../common/img/img1.jpg";
-import avatar from "../../common/img/avatar.jpg";
 import "./DashboardContent.css";
+import "../../../common/store";
+import store from "../../../common/store";
+import { updateTimeline } from "../../../common/action/timeline";
+import { getPrevData } from "../../../model/timeline";
 
 export default class DashboardContent extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fullname: "Addy Osmani",
-      username: "@addyosmani",
-      time: "19h",
-      mainText:
-        "Learn to debug CSS animations using @ChromeDevTools and the Animation",
-      action: "Retweet",
-      anothername: "Serena Wang"
+      timeline: store.getState().timeline.data
     };
+  }
+
+  componentDidMount() {
+    getPrevData(0, 10).then(data => {
+      store.dispatch(updateTimeline(data));
+    });
+
+    store.subscribe(() => {
+      this.setState({ timeline: store.getState().timeline.data });
+    });
   }
 
   render() {
@@ -30,52 +36,56 @@ export default class DashboardContent extends React.Component {
         <TweetBox />
         <div className="dashboard_content_main">
           <ol>
-            <li>
-              <div className="stream-tweet">
-                <Context
-                  username={this.state.anothername}
-                  actions={this.state.action}
-                >
-                  <Repeat size={13} />
-                </Context>
-                <div className="stream_tweet_content">
-                  <div className="item-header">
-                    <Header
-                      src={avatar}
-                      fullname={this.state.fullname}
-                      username={this.state.username}
-                      time={this.state.time}
-                    />
+            {this.state.timeline.map((data, index) => {
+              return (
+                <li key={index}>
+                  <div className="stream-tweet">
+                    <Context username={data.anothername} actions={data.action}>
+                      <Repeat size={13} />
+                    </Context>
+                    <div className="stream_tweet_content">
+                      <div className="item-header">
+                        <Header
+                          src={data.avatar}
+                          fullname={data.fullname}
+                          username={data.username}
+                          time={data.time}
+                        />
+                      </div>
+                      <div className="item-container">
+                        <ListText mainText={data.mainText} />
+                        <ListMedia src={data.img} />
+                      </div>
+                      <div className="item-footer">
+                        <div className="each-footer">
+                          <Tooltip textTip={"Reply"} countNum={data.replyNum}>
+                            <MessageCircle size={13} />
+                          </Tooltip>
+                        </div>
+                        <div className="each-footer">
+                          <Tooltip
+                            textTip={"Retweet"}
+                            countNum={data.retweetNum}
+                          >
+                            <Repeat size={13} />
+                          </Tooltip>
+                        </div>
+                        <div className="each-footer">
+                          <Tooltip textTip={"Like"} countNum={data.likeNum}>
+                            <Heart size={13} />
+                          </Tooltip>
+                        </div>
+                        <div className="each-footer">
+                          <Tooltip textTip={"Direct Message"} countNum={""}>
+                            <Mail size={13} />
+                          </Tooltip>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="item-container">
-                    <ListText mainText={this.state.mainText} />
-                    <ListMedia src={img1} />
-                  </div>
-                  <div className="item-footer">
-                    <div className="each-footer">
-                      <Tooltip textTip={"Reply"} countNum={7}>
-                        <MessageCircle size={13} />
-                      </Tooltip>
-                    </div>
-                    <div className="each-footer">
-                      <Tooltip textTip={"Retweet"} countNum={235}>
-                        <Repeat size={13} />
-                      </Tooltip>
-                    </div>
-                    <div className="each-footer">
-                      <Tooltip textTip={"Like"} countNum={876}>
-                        <Heart size={13} />
-                      </Tooltip>
-                    </div>
-                    <div className="each-footer">
-                      <Tooltip textTip={"Direct Message"} countNum={""}>
-                        <Mail size={13} />
-                      </Tooltip>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </div>

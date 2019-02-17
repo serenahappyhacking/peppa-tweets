@@ -5,6 +5,9 @@ import Avartar from "../../common/Avatar/Avatar";
 import Tooltip from "../../common/Tooltip/Tooltip";
 import avatar from "../../common/img/avatar.jpg";
 import { Image, Coffee, Cloud, MapPin, Smile } from "react-feather";
+import store from "../../../common/store";
+import { sendTweet } from "../../../common/action/timeline";
+import { sendTweetData } from "../../../model/timeline";
 
 class TweetBoxFocus extends React.Component {
   constructor(props) {
@@ -39,7 +42,8 @@ class TweetBoxFocus extends React.Component {
       value,
       onFocusChange,
       onBlurChange,
-      onTextChange
+      onTextChange,
+      onSendTweet
     } = this.props;
     if (!isFocused && !value) {
       return (
@@ -102,7 +106,7 @@ class TweetBoxFocus extends React.Component {
               <span className="add-tweet-btn">
                 <button>+</button>
               </span>
-              <Button text={"Tweet"} />
+              <Button text={"Tweet"} onClick={onSendTweet} />
             </div>
           </div>
         </div>
@@ -121,19 +125,24 @@ export default class TweetBox extends React.Component {
   }
 
   handleFocus = e => {
-    console.log("focused");
     if (e.target) {
       this.setState({ isFocused: true });
     }
   };
 
   handleBlur = () => {
-    console.log("blur");
     this.setState({ isFocused: false });
   };
 
   handleTextChange = e => {
     this.setState({ value: e.target.value });
+  };
+
+  sendTweet = e => {
+    const textValue = this.state.value;
+    sendTweetData(textValue).then(tweet => {
+      store.dispatch(sendTweet(tweet));
+    });
   };
 
   render() {
@@ -148,6 +157,7 @@ export default class TweetBox extends React.Component {
           onFocusChange={this.handleFocus}
           onBlurChange={this.handleBlur}
           onTextChange={this.handleTextChange}
+          onSendTweet={this.sendTweet}
         />
       </div>
     );

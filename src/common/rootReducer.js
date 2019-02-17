@@ -1,8 +1,6 @@
-import {combineReducers} from 'redux';
-import {routerReducer} from 'react-router-redux';
+import { combineReducers } from "redux";
+import timeline from "./reducer/timeline";
 
-const reducerMap = {
-
-}
-
-export default combineReducers(reducerMap);
+export default combineReducers({
+  timeline
+});
