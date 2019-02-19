@@ -14,10 +14,13 @@ const TIMELINE_DATA = [
     action: "Retweet",
     anothername: "Serena Wang",
     img: cat,
-    avatar: avatar
+    avatar: avatar,
+    replyNum: 53,
+    likeNum: 279,
+    retweetNum: 472
   },
   {
-    id: 1,
+    id: 2,
     fullname: "Addy Osmani",
     username: "@addyosmani",
     time: "19h",
@@ -26,10 +29,13 @@ const TIMELINE_DATA = [
     action: "Retweet",
     anothername: "Serena Wang",
     img: cafe,
-    avatar: avatar
+    avatar: avatar,
+    replyNum: 53,
+    likeNum: 279,
+    retweetNum: 472
   },
   {
-    id: 1,
+    id: 3,
     fullname: "Addy Osmani",
     username: "@addyosmani",
     time: "19h",
@@ -38,7 +44,25 @@ const TIMELINE_DATA = [
     action: "Retweet",
     anothername: "Serena Wang",
     img: campus,
-    avatar: avatar
+    avatar: avatar,
+    replyNum: 53,
+    likeNum: 279,
+    retweetNum: 472
+  },
+  {
+    id: 4,
+    fullname: "Addy Osmani",
+    username: "@addyosmani",
+    time: "19h",
+    mainText:
+      "Learn to debug CSS animations using @ChromeDevTools and the Animation",
+    action: "Retweet",
+    anothername: "Serena Wang",
+    img: cafe,
+    avatar: avatar,
+    replyNum: 53,
+    likeNum: 279,
+    retweetNum: 472
   }
 ];
 

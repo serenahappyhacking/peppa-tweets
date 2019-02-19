@@ -1,11 +1,3 @@
-a {
-  text-decoration: none;
-}
-
-li {
-  list-style-type: none;
-}
-
 .dashboard_left {
   width: 290px;
 }
@@ -25,12 +17,10 @@ li {
 }
 
 .profile_card_bguser {
-  background-image: url("../../common/img/simple.jpg");
   display: inline-block;
   width: 100%;
   height: 90px;
   background-size: cover;
-  /* background-repeat: no-repeat; */
 }
 
 .profile_card_content > .username {
@@ -73,6 +63,11 @@ li {
   padding: 10px 22px;
 }
 
+.trend_header {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
 .trend_topic {
   font-weight: bold;
   color: #f98591;
@@ -82,4 +77,8 @@ li {
   color: #657786;
   font-size: 12px;
   line-height: 16px;
+}
+
+.trend_content li {
+  padding-top: 1em;
 }
