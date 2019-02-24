@@ -3,68 +3,72 @@ import avatar from "../features/common/img/avatar.jpg";
 import cafe from "../features/common/img/cafe.jpg";
 import campus from "../features/common/img/campus.jpg";
 
-const TIMELINE_DATA = [
-  {
-    id: 1,
-    fullname: "Addy Osmani",
-    username: "@addyosmani",
-    time: "19h",
-    mainText:
-      "Learn to debug CSS animations using @ChromeDevTools and the Animation",
-    action: "Retweet",
-    anothername: "Serena Wang",
-    img: cat,
-    avatar: avatar,
-    replyNum: 53,
-    likeNum: 279,
-    retweetNum: 472
-  },
-  {
-    id: 2,
-    fullname: "Addy Osmani",
-    username: "@addyosmani",
-    time: "19h",
-    mainText:
-      "Learn to debug CSS animations using @ChromeDevTools and the Animation",
-    action: "Retweet",
-    anothername: "Serena Wang",
-    img: cafe,
-    avatar: avatar,
-    replyNum: 53,
-    likeNum: 279,
-    retweetNum: 472
-  },
-  {
-    id: 3,
-    fullname: "Addy Osmani",
-    username: "@addyosmani",
-    time: "19h",
-    mainText:
-      "Learn to debug CSS animations using @ChromeDevTools and the Animation",
-    action: "Retweet",
-    anothername: "Serena Wang",
-    img: campus,
-    avatar: avatar,
-    replyNum: 53,
-    likeNum: 279,
-    retweetNum: 472
-  },
-  {
-    id: 4,
-    fullname: "Addy Osmani",
-    username: "@addyosmani",
-    time: "19h",
-    mainText:
-      "Learn to debug CSS animations using @ChromeDevTools and the Animation",
-    action: "Retweet",
-    anothername: "Serena Wang",
-    img: cafe,
-    avatar: avatar,
-    replyNum: 53,
-    likeNum: 279,
-    retweetNum: 472
-  }
-];
+const TIMELINE_DATA = {
+  userId: 666,
+  avatar: avatar,
+  tweets: [
+    {
+      id: 1,
+      fullname: "Addy Osmani",
+      username: "@addyosmani",
+      time: "19h",
+      mainText:
+        "Learn to debug CSS animations using @ChromeDevTools and the Animation",
+      action: "Retweet",
+      anothername: "Serena Wang",
+      img: cat,
+      avatar: avatar,
+      replyNum: 53,
+      likeNum: 279,
+      retweetNum: 472
+    },
+    {
+      id: 2,
+      fullname: "Addy Osmani",
+      username: "@addyosmani",
+      time: "19h",
+      mainText:
+        "Learn to debug CSS animations using @ChromeDevTools and the Animation",
+      action: "Retweet",
+      anothername: "Serena Wang",
+      img: cafe,
+      avatar: avatar,
+      replyNum: 53,
+      likeNum: 279,
+      retweetNum: 472
+    },
+    {
+      id: 3,
+      fullname: "Addy Osmani",
+      username: "@addyosmani",
+      time: "19h",
+      mainText:
+        "Learn to debug CSS animations using @ChromeDevTools and the Animation",
+      action: "Retweet",
+      anothername: "Serena Wang",
+      img: campus,
+      avatar: avatar,
+      replyNum: 53,
+      likeNum: 279,
+      retweetNum: 472
+    },
+    {
+      id: 4,
+      fullname: "Addy Osmani",
+      username: "@addyosmani",
+      time: "19h",
+      mainText:
+        "Learn to debug CSS animations using @ChromeDevTools and the Animation",
+      action: "Retweet",
+      anothername: "Serena Wang",
+      img: cafe,
+      avatar: avatar,
+      replyNum: 53,
+      likeNum: 279,
+      retweetNum: 472
+    }
+  ]
+};
 
 export const getPrevData = (offset, size) => {
   return new Promise((resolve, reject) => {
@@ -74,14 +78,19 @@ export const getPrevData = (offset, size) => {
   });
 };
 
-export const sendTweetData = tweet => {
+export const sendTweetData = newTweet => {
   return Promise.resolve({
-    id: 0,
+    id: newTweet.userId,
+    mainText: newTweet.textValue,
     fullname: "Leo",
     username: "@devxleo",
     time: "1min",
-    mainText: tweet,
+    avatar: avatar,
     action: "Retweet",
-    anothername: "Serena Wang"
+    anothername: "Serena Wang",
+    img: cat,
+    replyNum: 153,
+    likeNum: 239,
+    retweetNum: 4
   });
 };

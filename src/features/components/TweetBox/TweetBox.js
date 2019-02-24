@@ -1,10 +1,9 @@
 import React from "react";
 import "./TweetBox.css";
 import Button from "../../common/Button/Button";
-import Avartar from "../../common/Avatar/Avatar";
+import Avatar from "../../common/Avatar/Avatar";
 import Tooltip from "../../common/Tooltip/Tooltip";
-import avatar from "../../common/img/avatar.jpg";
-import { Image, Coffee, Cloud, MapPin, Smile } from "react-feather";
+import { Image, Coffee, Cloud, MapPin } from "react-feather";
 import store from "../../../common/store";
 import { sendTweet } from "../../../common/action/timeline";
 import { sendTweetData } from "../../../model/timeline";
@@ -30,7 +29,6 @@ class TweetBoxFocus extends React.Component {
   };
 
   handleClickImage = e => {
-    console.log("upload image now.");
     if (this.uploadImageRef) {
       this.uploadImageRef.current.click();
     }
@@ -43,7 +41,8 @@ class TweetBoxFocus extends React.Component {
       onFocusChange,
       onBlurChange,
       onTextChange,
-      onSendTweet
+      onSendTweet,
+      onKeyDown
     } = this.props;
     if (!isFocused && !value) {
       return (
@@ -75,6 +74,8 @@ class TweetBoxFocus extends React.Component {
             onBlur={onBlurChange}
             ref={this.textareaRef}
             onChange={onTextChange}
+            onKeyDown={onKeyDown}
+            value={value}
           />
           <div className="toolbox">
             <div className="items">
@@ -138,18 +139,29 @@ export default class TweetBox extends React.Component {
     this.setState({ value: e.target.value });
   };
 
-  sendTweet = e => {
-    const textValue = this.state.value;
-    sendTweetData(textValue).then(tweet => {
+  sendTweet = () => {
+    const newTweet = {
+      textValue: this.state.value,
+      userId: this.props.userId
+    };
+    sendTweetData(newTweet).then(tweet => {
       store.dispatch(sendTweet(tweet));
     });
+    this.setState({ value: "", isFocused: false });
+  };
+
+  onKeyDown = e => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.sendTweet();
+    }
   };
 
   render() {
     return (
       <div className="tweet_box">
         <div className="avatar">
-          <Avartar src={avatar} size={"extra-small"} />
+          <Avatar src={this.props.src} size={"extra-small"} />
         </div>
         <TweetBoxFocus
           isFocused={this.state.isFocused}
@@ -158,6 +170,7 @@ export default class TweetBox extends React.Component {
           onBlurChange={this.handleBlur}
           onTextChange={this.handleTextChange}
           onSendTweet={this.sendTweet}
+          onKeyDown={this.onKeyDown}
         />
       </div>
     );

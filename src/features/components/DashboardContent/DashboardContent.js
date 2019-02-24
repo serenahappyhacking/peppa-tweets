@@ -5,7 +5,7 @@ import Context from "../../common/Context/Context";
 import ListText from "../../common/ListText/ListText";
 import ListMedia from "../../common/ListMedia/ListMedia";
 import Tooltip from "../../common/Tooltip/Tooltip";
-import { MessageCircle, Repeat, Heart, Mail, User } from "react-feather";
+import { MessageCircle, Repeat, Heart, Mail } from "react-feather";
 import "./DashboardContent.css";
 import "../../../common/store";
 import store from "../../../common/store";
@@ -31,18 +31,22 @@ export default class DashboardContent extends React.Component {
   }
 
   render() {
+    if (!this.state.timeline.userId) {
+      return "Tweets is loading...";
+    }
     return (
       <div className="dashboard_content">
-        <TweetBox />
+        <TweetBox
+          src={this.state.timeline.avatar}
+          userId={this.state.timeline.userId}
+        />
         <div className="dashboard_content_main">
           <ol>
-            {this.state.timeline.map((data, index) => {
+            {this.state.timeline.tweets.map((data, index) => {
               return (
                 <li key={index}>
                   <div className="stream-tweet">
-                    <Context username={data.anothername} actions={data.action}>
-                      <Repeat size={13} />
-                    </Context>
+                    <Context username={data.anothername} action={data.action} />
                     <div className="stream_tweet_content">
                       <div className="item-header">
                         <Header

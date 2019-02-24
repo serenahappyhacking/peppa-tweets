@@ -6,7 +6,7 @@ export const updateTimeline = data => ({
   data
 });
 
-export const sendTweet = tweet => ({
+export const sendTweet = newTweet => ({
   type: SEND_TWEET,
-  tweet
+  newTweet
 });
