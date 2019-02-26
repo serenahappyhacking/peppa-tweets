@@ -1,12 +1,10 @@
 import React from "react";
-import "./TweetBox.css";
 import Button from "../../common/Button/Button";
 import Avatar from "../../common/Avatar/Avatar";
 import Tooltip from "../../common/Tooltip/Tooltip";
 import { Image, Coffee, Cloud, MapPin } from "react-feather";
-import store from "../../../common/store";
-import { sendTweet } from "../../../common/action/timeline";
 import { sendTweetData } from "../../../model/timeline";
+import "./TweetBox.css";
 
 class TweetBoxFocus extends React.Component {
   constructor(props) {
@@ -145,7 +143,7 @@ export default class TweetBox extends React.Component {
       userId: this.props.userId
     };
     sendTweetData(newTweet).then(tweet => {
-      store.dispatch(sendTweet(tweet));
+      this.props.onSendTweetData(tweet);
     });
     this.setState({ value: "", isFocused: false });
   };

@@ -6,43 +6,33 @@ import ListText from "../../common/ListText/ListText";
 import ListMedia from "../../common/ListMedia/ListMedia";
 import Tooltip from "../../common/Tooltip/Tooltip";
 import { MessageCircle, Repeat, Heart, Mail } from "react-feather";
-import "./DashboardContent.css";
-import "../../../common/store";
-import store from "../../../common/store";
 import { updateTimeline } from "../../../common/action/timeline";
+import { sendTweet } from "../../../common/action/timeline";
 import { getPrevData } from "../../../model/timeline";
+import { connect } from "react-redux";
+import "./DashboardContent.css";
 
-export default class DashboardContent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      timeline: store.getState().timeline.data
-    };
-  }
-
+class DashboardContent extends React.Component {
   componentDidMount() {
     getPrevData(0, 10).then(data => {
-      store.dispatch(updateTimeline(data));
-    });
-
-    store.subscribe(() => {
-      this.setState({ timeline: store.getState().timeline.data });
+      this.props.onTimelineUpdate(data);
     });
   }
 
   render() {
-    if (!this.state.timeline.userId) {
+    if (!this.props.timeline.userId) {
       return "Tweets is loading...";
     }
     return (
       <div className="dashboard_content">
         <TweetBox
-          src={this.state.timeline.avatar}
-          userId={this.state.timeline.userId}
+          src={this.props.timeline.avatar}
+          userId={this.props.timeline.userId}
+          onSendTweetData={this.props.onSendTweetData}
         />
         <div className="dashboard_content_main">
           <ol>
-            {this.state.timeline.tweets.map((data, index) => {
+            {this.props.timeline.tweets.map((data, index) => {
               return (
                 <li key={index}>
                   <div className="stream-tweet">
@@ -96,3 +86,27 @@ export default class DashboardContent extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    timeline: state.timeline.data
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onTimelineUpdate: data => {
+      dispatch(updateTimeline(data));
+    },
+    onSendTweetData: tweet => {
+      dispatch(sendTweet(tweet));
+    }
+  };
+};
+
+DashboardContent = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardContent);
+
+export default DashboardContent;

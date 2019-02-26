@@ -1,9 +1,9 @@
 import React from "react";
 import "./DashboardLeft.css";
 import Avatar from "../../common/Avatar/Avatar";
-import store from "../../../common/store";
 import { getProfileData } from "../../../model/profile";
 import { updateProfileData } from "../../../common/action/profile";
+import { connect } from "react-redux";
 
 class Trends extends React.Component {
   render() {
@@ -33,25 +33,14 @@ class Trends extends React.Component {
 }
 
 export default class DashboardLeft extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      profile: store.getState().profile.data
-    };
-  }
-
   componentDidMount() {
     getProfileData(25).then(data => {
-      store.dispatch(updateProfileData(data));
-    });
-
-    store.subscribe(() => {
-      this.setState({ profile: store.getState().profile.data });
+      this.props.onUpdateProfile(data);
     });
   }
 
   render() {
-    const profile = this.state.profile;
+    const profile = this.props.profile;
     return (
       <div className="dashboard_left">
         <div className="profile_card">
@@ -99,3 +88,22 @@ export default class DashboardLeft extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    profile: state.profile.data
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onUpdateProfile: data => {
+      dispatch(updateProfileData(data));
+    }
+  };
+};
+
+DashboardLeft = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardLeft);
