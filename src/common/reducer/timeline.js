@@ -15,11 +15,15 @@ const timelines = (state = initialState, action) => {
         })
       };
     case DELETE_TWEET:
-      let tweetsClone = [...state.data.tweets];
-      tweetsClone.splice(action.id, 1);
+      // let filteredTweet = state.data.tweets.filter(
+      //   tweet => tweet.id !== action.id
+      // );
+      let index = state.data.tweets.findIndex(tweet => tweet.id === action.id);
+      let cloneTweets = [...state.data.tweets];
+      cloneTweets.splice(index, 1);
       return {
         data: Object.assign({}, state.data, {
-          tweets: [...tweetsClone]
+          tweets: [...cloneTweets]
         })
       };
     default:

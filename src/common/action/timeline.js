@@ -12,7 +12,10 @@ export const sendTweet = newTweet => ({
   newTweet
 });
 
-export const deleteTweet = id => ({
-  type: DELETE_TWEET,
-  id
-});
+export const deleteTweet = id => {
+  console.log(id);
+  return {
+    type: DELETE_TWEET,
+    id
+  };
+};

@@ -14,6 +14,7 @@ import {
 import { getPrevData } from "../../../model/timeline";
 import { connect } from "react-redux";
 import "./DashboardContent.css";
+import { runInThisContext } from "vm";
 
 class DashboardContent extends React.Component {
   componentDidMount() {
@@ -38,7 +39,9 @@ class DashboardContent extends React.Component {
             {this.props.timeline.tweets.map((data, index) => {
               return (
                 <li key={data.id}>
-                  <button onClick={this.props.onDeleteTweet}>x</button>
+                  <button onClick={e => this.props.onDeleteTweet(data.id)}>
+                    x
+                  </button>
                   <div className="stream-tweet">
                     <Context username={data.anothername} action={data.action} />
                     <div className="stream_tweet_content">
