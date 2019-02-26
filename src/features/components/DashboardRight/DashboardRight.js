@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "./DashboardRight.css";
 import Tooltip from "../../common/Tooltip/Tooltip";
 import Avatar from "../../common/Avatar/Avatar";
@@ -78,5 +77,3 @@ export default class DashboardRight extends React.Component {
     );
   }
 }
-
-DashboardRight.propTypes = {};

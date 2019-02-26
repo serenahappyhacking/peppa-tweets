@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "./Topbar.css";
 import { Twitter, Home, Activity, Bell, Mail, Search } from "react-feather";
 import Avatar from "../../common/Avatar/Avatar";
@@ -54,5 +53,3 @@ export default class Toolbar extends React.Component {
     );
   }
 }
-
-Toolbar.propTypes = {};

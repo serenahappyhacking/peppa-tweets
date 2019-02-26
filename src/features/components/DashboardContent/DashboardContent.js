@@ -6,8 +6,11 @@ import ListText from "../../common/ListText/ListText";
 import ListMedia from "../../common/ListMedia/ListMedia";
 import Tooltip from "../../common/Tooltip/Tooltip";
 import { MessageCircle, Repeat, Heart, Mail } from "react-feather";
-import { updateTimeline } from "../../../common/action/timeline";
-import { sendTweet } from "../../../common/action/timeline";
+import {
+  updateTimeline,
+  sendTweet,
+  deleteTweet
+} from "../../../common/action/timeline";
 import { getPrevData } from "../../../model/timeline";
 import { connect } from "react-redux";
 import "./DashboardContent.css";
@@ -34,7 +37,8 @@ class DashboardContent extends React.Component {
           <ol>
             {this.props.timeline.tweets.map((data, index) => {
               return (
-                <li key={index}>
+                <li key={data.id}>
+                  <button onClick={this.props.onDeleteTweet}>x</button>
                   <div className="stream-tweet">
                     <Context username={data.anothername} action={data.action} />
                     <div className="stream_tweet_content">
@@ -100,6 +104,9 @@ const mapDispatchToProps = dispatch => {
     },
     onSendTweetData: tweet => {
       dispatch(sendTweet(tweet));
+    },
+    onDeleteTweet: id => {
+      dispatch(deleteTweet(id));
     }
   };
 };

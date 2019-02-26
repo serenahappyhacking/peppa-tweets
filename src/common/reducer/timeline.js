@@ -1,5 +1,4 @@
-import { UPDATE_TIMELINE } from "../action/timeline";
-import { SEND_TWEET } from "../action/timeline";
+import { UPDATE_TIMELINE, SEND_TWEET, DELETE_TWEET } from "../action/timeline";
 
 const initialState = { data: {} };
 
@@ -13,6 +12,14 @@ const timelines = (state = initialState, action) => {
       return {
         data: Object.assign({}, state.data, {
           tweets: [action.newTweet, ...state.data.tweets]
+        })
+      };
+    case DELETE_TWEET:
+      let tweetsClone = [...state.data.tweets];
+      tweetsClone.splice(action.id, 1);
+      return {
+        data: Object.assign({}, state.data, {
+          tweets: [...tweetsClone]
         })
       };
     default:
