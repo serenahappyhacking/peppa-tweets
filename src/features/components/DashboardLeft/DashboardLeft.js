@@ -2,7 +2,7 @@ import React from "react";
 import "./DashboardLeft.css";
 import Avatar from "../../common/Avatar/Avatar";
 import { getProfileData } from "../../../model/profile";
-import { updateProfileData } from "../../../common/action/profile";
+import { updateProfileData } from "../../../redux/action/profile";
 import { connect } from "react-redux";
 
 class Trends extends React.Component {

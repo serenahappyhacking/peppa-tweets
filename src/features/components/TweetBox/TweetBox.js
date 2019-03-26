@@ -1,10 +1,10 @@
 import React from "react";
+import "./TweetBox.css";
 import Button from "../../common/Button/Button";
 import Avatar from "../../common/Avatar/Avatar";
 import Tooltip from "../../common/Tooltip/Tooltip";
 import { Image, Coffee, Cloud, MapPin } from "react-feather";
 import { sendTweetData } from "../../../model/timeline";
-import "./TweetBox.css";
 
 class TweetBoxFocus extends React.Component {
   constructor(props) {

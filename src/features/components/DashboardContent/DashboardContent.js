@@ -1,4 +1,5 @@
 import React from "react";
+import "./DashboardContent.css";
 import TweetBox from "../TweetBox/TweetBox";
 import Header from "../../common/Header/Header";
 import Context from "../../common/Context/Context";
@@ -10,10 +11,9 @@ import {
   updateTimeline,
   sendTweet,
   deleteTweet
-} from "../../../common/action/timeline";
+} from "../../../redux/action/timeline";
 import { getPrevData } from "../../../model/timeline";
 import { connect } from "react-redux";
-import "./DashboardContent.css";
 
 class DashboardContent extends React.Component {
   componentDidMount() {
