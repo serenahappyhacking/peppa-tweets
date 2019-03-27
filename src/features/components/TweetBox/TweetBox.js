@@ -12,6 +12,10 @@ class TweetBoxFocus extends React.Component {
     this.textareaRef = React.createRef();
     this.uploadRef = React.createRef();
     this.uploadImageRef = React.createRef();
+
+    this.state = {
+      file: null
+    };
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -30,6 +34,20 @@ class TweetBoxFocus extends React.Component {
     if (this.uploadImageRef) {
       this.uploadImageRef.current.click();
     }
+  };
+
+  handleChange = e => {
+    const files = Array.from(this.uploadRef.current.files);
+    this.setState({
+      file: URL.createObjectURL(files[0])
+    });
+  };
+
+  handleChangeImageFile = e => {
+    const files = Array.from(this.uploadImageRef.current.files);
+    this.setState({
+      file: URL.createObjectURL(files[0])
+    });
   };
 
   render() {
@@ -61,6 +79,7 @@ class TweetBoxFocus extends React.Component {
             type="file"
             accept="image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/x-m4v"
             ref={this.uploadRef}
+            onChange={this.handleChange}
           />
         </div>
       );
@@ -75,6 +94,9 @@ class TweetBoxFocus extends React.Component {
             onKeyDown={onKeyDown}
             value={value}
           />
+          <div className="selected_imgfile">
+            <img src={this.state.file} alt="...loading" />
+          </div>
           <div className="toolbox">
             <div className="items">
               <div>
@@ -90,6 +112,7 @@ class TweetBoxFocus extends React.Component {
                 type="file"
                 accept="image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/x-m4v"
                 ref={this.uploadImageRef}
+                onChange={this.handleChangeImageFile}
               />
               <Tooltip textTip={"Add a GIF"}>
                 <Coffee size={20} />

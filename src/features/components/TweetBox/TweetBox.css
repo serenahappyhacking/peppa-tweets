@@ -74,3 +74,8 @@
 .upload {
   display: none;
 }
+
+.tweet_box_after .selected_imgfile > img {
+  height: 170px;
+  margin-top: 1em;
+}
