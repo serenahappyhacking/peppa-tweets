@@ -75,7 +75,11 @@
   display: none;
 }
 
+.tweet_box_after .selected_imgfile {
+  display: inline-block;
+}
 .tweet_box_after .selected_imgfile > img {
-  height: 170px;
+  width: 150px;
+  margin: 0 0.6em;
   margin-top: 1em;
 }

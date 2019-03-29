@@ -6,6 +6,19 @@ import Tooltip from "../../common/Tooltip/Tooltip";
 import { Image, Coffee, Cloud, MapPin } from "react-feather";
 import { sendTweetData } from "../../../model/timeline";
 
+function ImageUploaded({ index, selected, file, handleRemoveImg, urlArr }) {
+  if (index === selected) {
+    urlArr.splice(index, 1);
+  }
+
+  return (
+    <div className="selected_imgfile">
+      <img src={file} alt="...loading" />
+      <span onClick={() => handleRemoveImg(index)}>x</span>
+    </div>
+  );
+}
+
 class TweetBoxFocus extends React.Component {
   constructor(props) {
     super(props);
@@ -14,11 +27,12 @@ class TweetBoxFocus extends React.Component {
     this.uploadImageRef = React.createRef();
 
     this.state = {
-      file: null
+      urlArr: [],
+      selected: ""
     };
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps) {
     if (!prevProps.isFocused && this.props.isFocused) {
       this.textareaRef.current.focus();
     }
@@ -37,17 +51,36 @@ class TweetBoxFocus extends React.Component {
   };
 
   handleChange = e => {
-    const files = Array.from(this.uploadRef.current.files);
+    const filesArr = Array.from(this.uploadRef.current.files);
     this.setState({
-      file: URL.createObjectURL(files[0])
+      urlArr: [
+        ...this.state.urlArr,
+        ...filesArr.map(file => URL.createObjectURL(file))
+      ]
     });
   };
 
-  handleChangeImageFile = e => {
-    const files = Array.from(this.uploadImageRef.current.files);
+  handleChangeImageFileUpload = e => {
+    const filesArr = Array.from(this.uploadImageRef.current.files);
     this.setState({
-      file: URL.createObjectURL(files[0])
+      urlArr: [
+        ...this.state.urlArr,
+        ...filesArr.map(file => URL.createObjectURL(file))
+      ]
     });
+  };
+
+  handleRemoveImg = index => {
+    this.setState({
+      selected: index
+    });
+  };
+
+  _onBlur = e => {
+    if (e.relatedTarget != null && e.currentTarget.contains(e.relatedTarget)) {
+      return;
+    }
+    this.props.onBlurChange();
   };
 
   render() {
@@ -55,12 +88,13 @@ class TweetBoxFocus extends React.Component {
       isFocused,
       value,
       onFocusChange,
-      onBlurChange,
       onTextChange,
       onSendTweet,
       onKeyDown
     } = this.props;
-    if (!isFocused && !value) {
+
+    const { urlArr, selected } = this.state;
+    if (!isFocused && !value && this.state.urlArr.length === 0) {
       return (
         <div className="tweet_box_before">
           <input
@@ -69,34 +103,49 @@ class TweetBoxFocus extends React.Component {
             placeholder="What's happening?"
             onFocus={onFocusChange}
           />
-          <div className="upload_image">
-            <Tooltip textTip={"Add photos or video"} onClick={this.handleClick}>
-              <Image size={15} />
-            </Tooltip>
+          <div>
+            <div className="upload_image">
+              <Tooltip
+                textTip={"Add photos or video"}
+                onClick={this.handleClick}
+              >
+                <Image size={15} />
+              </Tooltip>
+            </div>
+            <input
+              className="upload"
+              type="file"
+              accept="image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/x-m4v"
+              ref={this.uploadRef}
+              onChange={this.handleChange}
+            />
           </div>
-          <input
-            className="upload"
-            type="file"
-            accept="image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/x-m4v"
-            ref={this.uploadRef}
-            onChange={this.handleChange}
-          />
         </div>
       );
     } else {
       return (
-        <div className="tweet_box_after">
-          <textarea
-            className="content_focus_after"
-            onBlur={onBlurChange}
-            ref={this.textareaRef}
-            onChange={onTextChange}
-            onKeyDown={onKeyDown}
-            value={value}
-          />
-          <div className="selected_imgfile">
-            <img src={this.state.file} alt="...loading" />
+        <div className="tweet_box_after" onBlur={this._onBlur}>
+          <div>
+            <textarea
+              className="content_focus_after"
+              ref={this.textareaRef}
+              onChange={onTextChange}
+              onKeyDown={onKeyDown}
+              value={value}
+            />
           </div>
+          {urlArr.length === 0
+            ? null
+            : urlArr.map((file, index) => (
+                <ImageUploaded
+                  key={index}
+                  index={index}
+                  selected={selected}
+                  file={file}
+                  handleRemoveImg={this.handleRemoveImg}
+                  urlArr={urlArr}
+                />
+              ))}
           <div className="toolbox">
             <div className="items">
               <div>
@@ -112,7 +161,7 @@ class TweetBoxFocus extends React.Component {
                 type="file"
                 accept="image/gif,image/jpeg,image/jpg,image/png,video/mp4,video/x-m4v"
                 ref={this.uploadImageRef}
-                onChange={this.handleChangeImageFile}
+                onChange={this.handleChangeImageFileUpload}
               />
               <Tooltip textTip={"Add a GIF"}>
                 <Coffee size={20} />
@@ -152,7 +201,7 @@ export default class TweetBox extends React.Component {
     }
   };
 
-  handleBlur = () => {
+  handleBlur = e => {
     this.setState({ isFocused: false });
   };
 
